@@ -10,7 +10,7 @@ class Bureaucrat
     private:
         /* Fields */
         const std::string   _name;
-        int                 _grade; //1 - 150
+        int                 _grade;
 
     public:
         /* Constructors */
@@ -30,8 +30,8 @@ class Bureaucrat
         std::string getName(void) const;
         int         getGrade(void) const;
         void        setGrade(const int newGrade);
-        void        incrementGrade(void); //const?
-        void        decrementGrade(void); //const?
+        void        incrementGrade(void);
+        void        decrementGrade(void);
 
         /* Exceptions */
         class       GradeTooLowException : public std::exception
