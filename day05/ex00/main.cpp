@@ -1,20 +1,67 @@
 #include "Bureaucrat.hpp"
 
-#include <sstream>
-
-static std::string  toString(int i)
-{
-    std::stringstream strstream;
-
-    strstream << i;
-
-    return (strstream.str());
-}
-
 int     main(void)
 {
-    Bureaucrat b = Bureaucrat("John", 142);
+    Bureaucrat b1 = Bureaucrat("John", 142);
+    Bureaucrat b2 = Bureaucrat("Jane", 150);
+    Bureaucrat b3 = Bureaucrat("Bestest");
 
-    std::cout << "Name: " << b.getName() << std::endl;
-    std::cout << "Score: " << toString(b.getScore()) << std::endl;
+    std::cout << b1;
+    std::cout << b2;
+    std::cout << b3;
+
+    std::cout << std::endl;
+    std::cout << "==========" << std::endl;
+    std::cout << std::endl;
+
+    b3.setGrade(1);
+
+    std::cout << b1;
+    std::cout << b2;
+    std::cout << b3;
+
+    std::cout << std::endl;
+    std::cout << "==========" << std::endl;
+    std::cout << std::endl;
+
+    b1.decrementGrade();
+    b2.incrementGrade();
+    b3.decrementGrade();
+
+    std::cout << b1;
+    std::cout << b2;
+    std::cout << b3;
+
+    std::cout << std::endl;
+    std::cout << "==========" << std::endl;
+    std::cout << std::endl;
+
+    b3.incrementGrade();
+
+    std::cout << b1;
+    std::cout << b2;
+    std::cout << b3;
+
+    std::cout << std::endl;
+    std::cout << "==========" << std::endl;
+    std::cout << std::endl;
+
+    try
+    {
+        b3.incrementGrade();
+    }
+    catch (std::exception& ex)
+    {
+        std::cout << ex.what() << std::endl;
+    }
+
+    std::cout << b1;
+    std::cout << b2;
+    std::cout << b3;
+
+    std::cout << std::endl;
+    std::cout << "==========" << std::endl;
+    std::cout << std::endl;
+
+    return (0);
 }

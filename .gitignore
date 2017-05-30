@@ -1,3 +1,5 @@
 *.gch
 a.out
-.vscode
+a.exe
+*.stackdump
+*.vscode

@@ -1,91 +1,157 @@
 #include "Bureaucrat.hpp"
 
-#pragma region Constructors
+/* Constructors */
+Bureaucrat::Bureaucrat(void) : _name("")
+{
+    this->_grade = 150;
+}
 
-    Bureaucrat::Bureaucrat(void)
-    {
-        this->_name = "";
-        this->_grade = 150;
-    }
+Bureaucrat::Bureaucrat(const Bureaucrat& bureaucrat)
+{
+    *this = bureaucrat;
+}
 
-    Bureaucrat::Bureaucrat(const Bureaucrat& bureaucrat)
-    {
-        *this = bureaucrat;
-    }
+Bureaucrat::Bureaucrat(std::string name) : _name(name)
+{
+    this->_grade = 150;
+}
 
-    Bureaucrat::Bureaucrat(std::string name)
-    {
-        this->_name = name;
-        this->_grade = 150;
-    }
+Bureaucrat::Bureaucrat(int grade) : _name("")
+{
+    if (grade < 1)
+        throw Bureaucrat::GradeTooLowException();
+    else if (grade > 150)
+        throw Bureaucrat::GradeTooHighException();
+    this->_grade = grade;
+}
 
-    Bureaucrat::Bureaucrat(int score)
-    {
-        this->_name = "";
-        if (score < 1)
-            throw Bureaucrat::GradeTooLowException();
-        else if (score > 150)
-            throw Bureaucrat::GradeTooHighException();
-        this->_grade = score;
-    }
+Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name)
+{
+    if (grade < 1)
+        throw Bureaucrat::GradeTooLowException();
+    else if (grade > 150)
+        throw Bureaucrat::GradeTooHighException();
+    this->_grade = grade;
+}
 
-    Bureaucrat::Bureaucrat(std::string name, int score)
-    {
-        this->_name = name;
-        if (score < 1)
-            throw Bureaucrat::GradeTooLowException();
-        else if (score > 150)
-            throw Bureaucrat::GradeTooHighException();
-        this->_grade = score;
-    }
+/* Destructors */
+Bureaucrat::~Bureaucrat(void)
+{
+    return ;
+}
 
-#pragma endregion Constructors
+/* Operator Overloads */
+Bureaucrat& Bureaucrat::operator=(const Bureaucrat& bureaucrat)
+{
+    this->_grade = bureaucrat.getGrade();
 
-#pragma region Destructors
+    return (*this);
+}
 
-    Bureaucrat::~Bureaucrat(void)
-    {
-        return ;
-    }
+std::ostream& operator<<(std::ostream &ostr, const Bureaucrat &bureaucrat)
+{
+    ostr << bureaucrat.getName() << ", bureaucrat grade " 
+            << bureaucrat.getGrade() << std::endl;
+    return (ostr);
+}
 
-#pragma endregion Destructors
+/* Getters */
+std::string Bureaucrat::getName(void) const
+{
+    return (this->_name);
+}
 
-#pragma region Operator Overloads
+int         Bureaucrat::getGrade(void) const
+{
+    return (this->_grade);
+}
 
-    Bureaucrat& Bureaucrat::operator=(const Bureaucrat& bureaucrat)
-    {
-        this->_name = bureaucrat.getName();
-        this->_grade = bureaucrat.getScore();
+/* Setters */
+void        Bureaucrat::setGrade(const int newGrade)
+{
+    if (newGrade < 1)
+        throw Bureaucrat::GradeTooLowException();
+    else if (newGrade > 150)
+        throw Bureaucrat::GradeTooHighException();
+    this->_grade = newGrade;
+}
 
-        return (*this);
-    }
+/* Member Functions */
+void        Bureaucrat::incrementGrade(void)
+{
+    if (this->_grade <= 1)
+        throw Bureaucrat::GradeTooLowException();
+    this->_grade--;
+}
 
-#pragma endregion Operator Overloads
+void        Bureaucrat::decrementGrade(void)
+{
+    if (this->_grade >= 150)
+        throw Bureaucrat::GradeTooHighException();
+    this->_grade++;
+}
 
-#pragma region Member Functions
+/* Exceptions */
+Bureaucrat::GradeTooLowException::GradeTooLowException(void)
+{
+    return ;
+}
 
-    std::string Bureaucrat::getName(void) const
-    {
-        return (this->_name);
-    }
+Bureaucrat::GradeTooLowException::GradeTooLowException
+    (const Bureaucrat::GradeTooLowException& ex)
+{
+    *this = ex;
 
-    int         Bureaucrat::getScore(void) const
-    {
-        return (this->_grade);
-    }
+    return ;
+}
 
-    void        Bureaucrat::incrementScore(void) const
-    {
-        if (this->_grade <= 1)
-            throw Bureaucrat::GradeTooLowException();
-        this->_grade--;
-    }
+Bureaucrat::GradeTooLowException::~GradeTooLowException(void) throw()
+{
+    return ;
+}
 
-    void        Bureaucrat::decrementScore(void) const
-    {
-        if (this->_grade >= 150)
-            throw Bureaucrat::GradeTooHighException();
-        this->_grade++;
-    }
+Bureaucrat::GradeTooLowException
+    &Bureaucrat::GradeTooLowException::operator=
+        (const Bureaucrat::GradeTooLowException& ex)
+{
+    std::exception::operator=(ex);
 
-#pragma endregion Member Functions
+    return (*this);
+}
+
+const char *Bureaucrat::GradeTooLowException::what(void) const throw()
+{
+    return ("\"Bureaucrat::_grade\" cannot be less than 1");
+}
+
+Bureaucrat::GradeTooHighException::GradeTooHighException(void)
+{
+    return ;
+}
+
+Bureaucrat::GradeTooHighException::GradeTooHighException
+    (const Bureaucrat::GradeTooHighException& ex)
+{
+    *this = ex;
+
+    return ;
+}
+
+Bureaucrat::GradeTooHighException::~GradeTooHighException(void) throw()
+{
+    return ;
+}
+
+Bureaucrat::GradeTooHighException
+    &Bureaucrat::GradeTooHighException::operator=
+        (const Bureaucrat::GradeTooHighException& ex)
+{
+    std::exception::operator=(ex);
+
+    return (*this);
+}
+
+const char *Bureaucrat::GradeTooHighException::what(void) const throw()
+{
+    return ("\"Bureaucrat::_grade\" cannot be more that 150");
+}
