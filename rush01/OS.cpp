@@ -44,10 +44,10 @@ void    OS::_setOSNameAndArchitecure(void)
     #elif defined(__APPLE__) || defined(__MACH__)
         this->_osName = "MacOS";
         this->_osArchitecture = "64bit";    //? version could tell us more
-    #elif defined(__unix) || defined(__unix__)
-        this->_osName = "Unix";
     #elif __linux__
         this->_osName = "Linux";
+    #elif defined(__unix) || defined(__unix__)
+        this->_osName = "Unix";    
     #endif
 }
 
