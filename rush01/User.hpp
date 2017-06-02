@@ -2,12 +2,26 @@
 # define USER_HPP
 
 #include <iostream>
+#include <cstdlib>
+#include <string.h>
+#include <pwd.h>
+// #include <sys/types.h>
 
 class User
 {
     private:
-        std::string _userName;
+        std::string _userName;        
         bool        _isAdmin;
+
+        /*  These fields can be obtained from "getpwuid()"
+        long        _userID;
+        long        _groupID;           
+        std::string _initialWorkingDir;
+        std::string _shellProgram;
+        */
+
+        void        _setUserName(void);
+        void        _setIsAdmin(void);
 
     public:
         /* Constructors */
