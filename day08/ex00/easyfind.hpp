@@ -6,7 +6,7 @@
 #include <vector>
 
 template <typename T>
-void    easyfind(T& cInt, int i)
+int     easyfind(T& cInt, int i)
 {
     typename T::iterator    b;
     typename T::iterator    e;
@@ -21,18 +21,11 @@ void    easyfind(T& cInt, int i)
         while (idx < cInt.size())
         {
             if (cInt[idx] == i)
-            {
-                std::cout << "Found!" << std::endl << "Index: " << idx << " (position no.: " << (idx + 1) << ")" << std::endl << "Value: " << cInt[idx] << std::endl;
-                return ;
-            }
+                return (1);
             idx++;
         }
-        std::cout << "Value not found in container" << std::endl;
     }
-    else
-    {
-        std::cout << "Container is empty" << std::endl;
-    }
+    return (0);
 };
 
 #endif
