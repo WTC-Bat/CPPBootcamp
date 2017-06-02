@@ -33,6 +33,7 @@ OS::~OS(void)
 
 void    OS::_setOSNameAndArchitecure(void)
 {
+    this->_osArchitecture = "Unknown";  //tmp
     #ifdef _WIN32
         this->_osName = "Windows";
         this->_osArchitecture = "32/64bit";
@@ -51,6 +52,11 @@ void    OS::_setOSNameAndArchitecure(void)
     #endif
 }
 
+// void    OS::_setMacVersionNumber(void)
+// {
+    
+// }
+
 /* Member Functions */
 
 std::string OS::getOSName(void) const
@@ -58,6 +64,15 @@ std::string OS::getOSName(void) const
     if (!this->_osName.empty())
     {
         return (this->_osName);
+    }
+    return (NULL);
+}
+
+std::string OS::getOSArchitecture(void) const
+{
+    if (!this->_osArchitecture.empty())
+    {
+        return (this->_osArchitecture);
     }
     return (NULL);
 }

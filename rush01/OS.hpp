@@ -2,16 +2,19 @@
 # define OS_HPP
 
 # include <iostream>
+# include <cmath>
 
 #if defined(__linux) || defined(__linux__) // posix and unix too?
     #include <sys/utsname.h>
+// #elif defined(__APPLE__) || defined(__MACH__)
+    
 #endif 
 
 class OS
 {
     private:
         /* Fields */
-        std::string _osName;
+        std::string _osName;    //osType?
         std::string _osArchitecture;
         std::string _osVersion;
 
@@ -19,6 +22,7 @@ class OS
         // void    _setOSName(void);
         // void    _setOSArchitecture(void);
         void    _setOSNameAndArchitecure(void);
+        // void    _setMacVersionNumber(void);
         // void    _setOSVersion(void);
 
     public:
