@@ -3,14 +3,23 @@
 
 # include <iostream>
 
-// # include <sys/utsname.h>
+#if defined(__linux) || defined(__linux__) // posix and unix too?
+    #include <sys/utsname.h>
+#endif 
 
 class OS
 {
     private:
+        /* Fields */
         std::string _osName;
         std::string _osArchitecture;
         std::string _osVersion;
+
+        /* Private Functions */
+        // void    _setOSName(void);
+        // void    _setOSArchitecture(void);
+        void    _setOSNameAndArchitecure(void);
+        // void    _setOSVersion(void);
 
     public:
         /* Contructors */
@@ -25,6 +34,8 @@ class OS
 
         /* Member Functions */
         std::string getOSName(void) const;
+        std::string getOSArchitecture(void) const;
+        std::string getOSVersion(void) const;
 };
 
 #endif

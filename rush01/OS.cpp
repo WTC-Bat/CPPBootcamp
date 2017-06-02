@@ -1,35 +1,57 @@
 #include "OS.hpp"
 
-// /* Constructors */
+/* Constructors */
 OS::OS(void)
 {
-    #ifdef _WIN32
-    this->_osName = "Windows";
-    this->_osArchitecture = "32bit";
-    // this->_osVersion = 
-    #elif _WIN64
-    this->_osName = "Windows";
-    this->_osArchitecture = "64bit";
-    // this->_osVersion = 
-    #elif defined(__unix) || defined(__unix__)
-    this->_osName = "Unix";
-    // this->_osArchitecture = 
-    // this->_osVersion = 
-    #elif __linux__
-    this->_osName = "Linux"
-    // this->_osArchitecture = 
-    // this->_osVersion
-    #elif defined(__APPLE__) && defined(__MACH__)
-    this->_osName = "MacOS";
-    // this->_osArchitecture = 
-    // this->_osVersion = 
-    #endif
+    // this->_setOSName();
+    // this->_setOSArchitecture();
+    this->_setOSNameAndArchitecure();
+    // this->_setOSVersion()
 }
+
+/* Destructors */
 
 OS::~OS(void)
 {
     return ;
 }
+
+/* Private Functions */
+
+// void    OS::_setOSName(void)
+// {
+//     #if defined(_WIN32) || defined(_WIN64)
+//         this->_osName = "Windows";
+//     #elif defined(__unix) || defined(__unix__)
+//         this->_osName = "Unix";
+//     #elif __linux__
+//         this->_osName = "Linux"
+//     #elif defined(__APPLE__) || defined(__MACH__)
+//         this->_osName = "MacOS";
+//     #endif
+// }
+
+void    OS::_setOSNameAndArchitecure(void)
+{
+    #ifdef _WIN32
+        this->_osName = "Windows";
+        this->_osArchitecture = "32/64bit";
+        #ifdef _WIN64
+            this->_osArchitecture = "64bit";
+        #else
+            this->_osArchitecture - "32bit"; 
+        #endif
+    #elif defined(__APPLE__) || defined(__MACH__)
+        this->_osName = "MacOS";
+        this->_osArchitecture = "64bit";    //? version could tell us more
+    #elif defined(__unix) || defined(__unix__)
+        this->_osName = "Unix";
+    #elif __linux__
+        this->_osName = "Linux";
+    #endif
+}
+
+/* Member Functions */
 
 std::string OS::getOSName(void) const
 {
