@@ -15,7 +15,7 @@ class OS
     private:
         /* Fields */
         std::string _osName;    //osType?
-        std::string _osArchitecture;
+        std::string _osOpMode;
         std::string _osVersion;
 
         /* Private Functions */
@@ -38,7 +38,7 @@ class OS
 
         /* Member Functions */
         std::string getOSName(void) const;
-        std::string getOSArchitecture(void) const;
+        std::string getOSOpMode(void) const;
         std::string getOSVersion(void) const;
 };
 

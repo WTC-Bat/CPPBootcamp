@@ -4,13 +4,22 @@
 # include <iostream>
 # include <sys/types.h>
 # include <sys/sysctl.h>
-
-# include <unistd.h>    //alternate means for getting number of cores
+# include <unistd.h>
 
 class CPU
 {
     private:
-        int     _numberOfCores;
+        int         _numberOfCores;
+        std::string _machineOpMode;
+        std::string _model;
+        int         _byteOrder;
+        int         _physicalMemory;
+        int         _nonKernelMemory;   //?
+        int         _pageSize;
+        bool        _supportsFloat;
+        int         _floatSize;         //not sure if this is the size specified by sysctl
+        std::string _machineArchitecture;
+        
 
     public:
         /* Constructors */
@@ -24,7 +33,16 @@ class CPU
         CPU     operator=(const CPU& cpu);
 
         /* Member Functions */
-        int     getNumberOfCores(void) const;
+        int         getNumberOfCores(void) const;
+        std::string getMachineOpMode(void) const;
+        std::string getModel(void) const;
+        int         getByteOrder(void) const;
+        int         getPhysicalMemory(void) const;
+        int         getNonKernelMemory(void) const;
+        int         getPageSize(void) const;
+        bool        supportsFloat(void) const;
+        int         getFloatSize(void) const;
+        std::string getMachineArchitecture(void) const;
 };
 
 #endif

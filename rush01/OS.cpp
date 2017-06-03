@@ -24,7 +24,7 @@ OS::~OS(void)
 OS      OS::operator=(const OS& os)
 {
     this->_osName = os.getOSName();
-    this->_osArchitecture = os.getOSArchitecture();
+    this->_osOpMode = os.getOSOpMode();
     this->_osVersion = os.getOSVersion();
     return (*this);
 }
@@ -46,18 +46,18 @@ OS      OS::operator=(const OS& os)
 
 void    OS::_setOSNameAndArchitecure(void)
 {
-    this->_osArchitecture = "Unknown";  //tmp
+    this->_osOpMode = "Unknown";  //tmp
     #ifdef _WIN32
         this->_osName = "Windows";
-        this->_osArchitecture = "32/64bit";
+        this->_osOpMode = "32/64bit";
         #ifdef _WIN64
-            this->_osArchitecture = "64bit";
+            this->_osOpMode = "64bit";
         #else
-            this->_osArchitecture - "32bit"; 
+            this->_osOpMode - "32bit"; 
         #endif
     #elif defined(__APPLE__) || defined(__MACH__)
         this->_osName = "MacOS";
-        this->_osArchitecture = "64bit";    //? version could tell us more
+        this->_osOpMode = "64bit";    //? version could tell us more
     #elif __linux__
         this->_osName = "Linux";
     #elif defined(__unix) || defined(__unix__)
@@ -81,11 +81,11 @@ std::string OS::getOSName(void) const
     return (NULL);
 }
 
-std::string OS::getOSArchitecture(void) const
+std::string OS::getOSOpMode(void) const
 {
-    if (!this->_osArchitecture.empty())
+    if (!this->_osOpMode.empty())
     {
-        return (this->_osArchitecture);
+        return (this->_osOpMode);
     }
     return (NULL);
 }
@@ -96,4 +96,5 @@ std::string OS::getOSVersion(void) const
     {
         return (this->_osVersion);
     }
+    return (NULL);
 }

@@ -9,7 +9,18 @@ int     main(void)
     std::cout << "CPU Tests:" << std::endl;
 
     CPU cpu = CPU();
-    std::cout << cpu.getNumberOfCores() << std::endl;
+    std::cout << "Number of Cores: " << cpu.getNumberOfCores() << std::endl;
+    std::cout << "OpMode: " << cpu.getMachineOpMode() << std::endl;
+    std::cout << "Model: " << cpu.getModel() << std::endl;
+    std::cout << "Byte Order: "
+        << (cpu.getByteOrder() == 1234 ? "Little-Endian":"Big-Endian") 
+        << std::endl;
+    std::cout << "Physical Memory: " << cpu.getPhysicalMemory() << std::endl;
+    std::cout << "Non-Kernel Memory: " << cpu.getNonKernelMemory() << std::endl;
+    std::cout << "Page Size: " << cpu.getPageSize() << std::endl;
+    std::cout << "Supports Float: " << (cpu.supportsFloat() ? "Yes": "No") << std::endl;
+    std::cout << "Float Size: " << cpu.getFloatSize() << std::endl;
+    std::cout << "Machine Architecture: " << cpu.getMachineArchitecture() << std::endl;
 
     std::cout << std::endl;
     std::cout << "OS Tests:" << std::endl;
@@ -17,10 +28,10 @@ int     main(void)
     /*  OS Tests*/
     OS os = OS();
     std::string osName = os.getOSName();
-    std::string osArch = os.getOSArchitecture();
+    std::string osOpMode = os.getOSOpMode();
 
     std::cout << osName << std::endl;
-    std::cout << osArch << std::endl;
+    std::cout << osOpMode << std::endl;
 
     std::cout << std::endl;
     std::cout << "User Tests:" << std::endl;
