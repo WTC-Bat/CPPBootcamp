@@ -21,6 +21,14 @@ OS::~OS(void)
     return ;
 }
 
+OS      OS::operator=(const OS& os)
+{
+    this->_osName = os.getOSName();
+    this->_osArchitecture = os.getOSArchitecture();
+    this->_osVersion = os.getOSVersion();
+    return (*this);
+}
+
 /* Private Functions */
 
 // void    OS::_setOSName(void)
@@ -80,4 +88,12 @@ std::string OS::getOSArchitecture(void) const
         return (this->_osArchitecture);
     }
     return (NULL);
+}
+
+std::string OS::getOSVersion(void) const
+{
+    if (!this->_osVersion.empty())
+    {
+        return (this->_osVersion);
+    }
 }

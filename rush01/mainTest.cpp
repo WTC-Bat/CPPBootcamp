@@ -1,9 +1,16 @@
 #include "OS.hpp"
 #include "User.hpp"
+#include "CPU.hpp"
 // #include <iostream>
 
 int     main(void)
 {
+    std::cout << std::endl;
+    std::cout << "CPU Tests:" << std::endl;
+
+    CPU cpu = CPU();
+    std::cout << cpu.getNumberOfCores() << std::endl;
+
     std::cout << std::endl;
     std::cout << "OS Tests:" << std::endl;
     

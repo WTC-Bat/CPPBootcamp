@@ -2,7 +2,10 @@
 # define CPU_HPP
 
 # include <iostream>
-# include <unistd.h>
+# include <sys/types.h>
+# include <sys/sysctl.h>
+
+# include <unistd.h>    //alternate means for getting number of cores
 
 class CPU
 {
