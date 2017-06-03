@@ -9,6 +9,11 @@ OS::OS(void)
     // this->_setOSVersion()
 }
 
+OS::OS(const OS& os)
+{
+    *this = os;    
+}
+
 /* Destructors */
 
 OS::~OS(void)
