@@ -11,6 +11,15 @@ class CPU
     private:
         int         _numberOfCores;
         std::string _machineOpMode;
+        /*  model:
+        **  outputs (on my vm) iMac11,3
+        **  from what I can tell, that's
+        **  OSX 10.11.3 (El Capitan update/patch 3)
+        **  Not sure though
+        **  Sierra should be 10.12.x
+        **  Final El Capitan version should be 10.11.6 (iMac11,6)
+        **  However, "sw_vers" in the terminal simply states 10.11
+        */
         std::string _model;
         int         _byteOrder;
         int         _physicalMemory;
