@@ -5,22 +5,22 @@
 #include <cstdlib>
 #include <string.h>
 #include <pwd.h>
-// #include <sys/types.h>
+
+/* Unix-Type systems only at the moment*/
 
 class User
 {
     private:
-        std::string _userName;        
-        bool        _isAdmin;
-
-        /*  These fields can be obtained from "getpwuid()"
+        /* Fields */
+        std::string _userName;
         long        _userID;
-        long        _groupID;           
+        long        _groupID;
         std::string _initialWorkingDir;
         std::string _shellProgram;
-        */
+        bool        _isAdmin;
 
-        void        _setUserName(void);
+        /* Private Functions */
+        void        _initializeUser(void);
         void        _setIsAdmin(void);
 
     public:
@@ -39,6 +39,12 @@ class User
         /* Getters */
         std::string getUserName(void) const;
         bool        isAdmin(void) const;
+        long        getUserID(void) const;
+        long        getGroupID(void) const;
+        std::string getInitialWorkingDir(void) const;
+        std::string getShellProgram(void) const;
+
+        /* Exceptions */
 };
 
 #endif

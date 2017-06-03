@@ -4,9 +4,7 @@
 
 User::User(void) : _userName(""), _isAdmin(false)
 {
-    this->_setUserName();
-    this->_setIsAdmin();
-    // return ;
+    this->_initializeUser();
 }
 
 User::User(const User& user)
@@ -26,15 +24,29 @@ User::~User(void)
 User    User::operator=(const User& user)
 {
     this->_userName = user.getUserName();
-    // this->_isAdmin = user.isAdmin();
+    this->_isAdmin = user.isAdmin();
+    this->_userID = user.getUserID();
+    this->_groupID = user.getGroupID();
+    this->_initialWorkingDir = user.getInitialWorkingDir();
+    this->_shellProgram = user.getShellProgram();
     return (*this); //?
 }
 
 /* Private Functions */
 
-void        User::_setUserName(void)
+void        User::_initializeUser(void)
 {
+    struct passwd   *pwd;
+
+    pwd = getpwuid(0);
     this->_userName = std::getenv("USER");
+    this->_userID = pwd->pw_uid;
+    this->_groupID = pwd->pw_gid;
+    this->_initialWorkingDir = strdup(pwd->pw_dir);
+    this->_shellProgram = strdup(pwd->pw_shell);
+
+    //this could probably just be placed here instead of it's own function
+    this->_setIsAdmin();
 }
 
 void        User::_setIsAdmin(void)
@@ -68,4 +80,24 @@ std::string User::getUserName(void) const
 bool        User::isAdmin(void) const
 {
     return (this->_isAdmin);
+}
+
+long        User::getUserID(void) const
+{
+    return (this->_userID);
+}
+
+long        User::getGroupID(void) const
+{
+    return (this->_groupID);
+}
+
+std::string User::getInitialWorkingDir(void) const
+{
+    return (this->_initialWorkingDir);
+}
+
+std::string User::getShellProgram(void) const
+{
+    return (this->_shellProgram);
 }
